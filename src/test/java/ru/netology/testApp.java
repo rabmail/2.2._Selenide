@@ -2,6 +2,7 @@ package ru.netology;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.openqa.selenium.Keys;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -13,7 +14,7 @@ import static com.codeborne.selenide.Selenide.*;
 public class testApp {
 
       public String SetDate (int date){
-       return LocalDate.now().plusDays(date).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
+      return LocalDate.now().plusDays(date).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     @BeforeEach
@@ -34,28 +35,24 @@ public class testApp {
         //$(withText("Встреча успешно забронирована на")).shouldBe(visible, Duration.ofSeconds(15));
         $("[data-test-id=notification]").shouldBe((visible), Duration.ofSeconds(15));
     }
-//
-//    @Test
-//    void shouldTestValidationFIO() {
-//        open("http://localhost:9999");
-//        $("[data-test-id=name] input").setValue("");
-//        $("[data-test-id=phone] input").setValue("+79102280000");
-//        $("[data-test-id=agreement]").click();
-//        $("button").click();
-//        // $(".input__sub").shouldHave(exactText("Поле обязательно для заполнения"));
-//        $$(".input__sub").get(0).shouldHave(exactText("Поле обязательно для заполнения"));
-//    }
-//
-//    @Test
-//    void shouldTestValidationPhone() {
-//        open("http://localhost:9999");
-//        $("[data-test-id=name] input").setValue("Вася Пупкин");
-//        $("[data-test-id=phone] input").setValue("");
-//        $("[data-test-id=agreement]").click();
-//        $("button").click();
-//
-//        // $$(".input__sub").shouldHave(size(2));
-//        $$(".input__sub").get(1).shouldHave(exactText("Поле обязательно для заполнения"));
-//        //  $$(".input__sub").shouldHave(texts("Укажите точно как в паспорте", "Поле обязательно для заполнения"));
-//    }
+    @Test
+    void shouldTestWorkingDropDownMenuCity() {
+        $("[data-test-id=city] input").sendKeys("Бе", Keys.ARROW_DOWN, Keys.ENTER);
+        $("[data-test-id=date] input").setValue(SetDate(3));
+        $("[data-test-id=name] input").setValue("Пупкин Василий");
+        $("[data-test-id=phone] input").setValue("+79102280000");
+        $("[data-test-id=agreement]").click();
+        $$("button").get(1).click();
+        $("[data-test-id=notification]").shouldBe((visible), Duration.ofSeconds(15));
+    }
+    @Test
+    void shouldTestWorkingDropDownMenuDate() {
+        $("[data-test-id=city] input").sendKeys("Бе", Keys.ARROW_DOWN, Keys.ENTER);
+        $("[data-test-id=date] input").sendKeys(Keys.CONTROL,Keys.BACK_SPACE);
+        $("[data-test-id=date] input").setValue(SetDate(7));
+        $("[data-test-id=name] input").setValue("Пупкин Василий");
+        $("[data-test-id=phone] input").setValue("+79102280000");
+        $("[data-test-id=agreement]").click();
+        $$("button").get(1).click();
+    }
 }
