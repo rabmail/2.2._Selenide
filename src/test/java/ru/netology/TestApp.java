@@ -26,7 +26,7 @@ public class TestApp {
     @Test
     void shouldTestValidation() {
         $("[data-test-id=city] input").setValue("Белгород");
-        $("[data-test-id=date] input").sendKeys(Keys.CONTROL,Keys.BACK_SPACE);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(setDate(4));
         $("[data-test-id=name] input").setValue("Пупкин Василий");
         $("[data-test-id=phone] input").setValue("+79102280000");
@@ -48,7 +48,7 @@ public class TestApp {
     @Test
     void shouldTestWorkingDropDownMenuDate() {
         $("[data-test-id=city] input").sendKeys("Бе", Keys.ARROW_DOWN, Keys.ENTER);
-        $("[data-test-id=date] input").sendKeys(Keys.CONTROL,Keys.BACK_SPACE);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(setDate(7));
         $("[data-test-id=name] input").setValue("Пупкин Василий");
         $("[data-test-id=phone] input").setValue("+79102280000");
@@ -59,7 +59,7 @@ public class TestApp {
     void shouldTestValidationData() {
         String  dateTest = setDate(4);
         $("[data-test-id=city] input").setValue("Белгород");
-        $("[data-test-id=date] input").sendKeys(Keys.CONTROL,Keys.BACK_SPACE);
+        $("[data-test-id=date] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.BACK_SPACE);
         $("[data-test-id=date] input").setValue(setDate(4));
         $("[data-test-id=name] input").setValue("Пупкин Василий");
         $("[data-test-id=phone] input").setValue("+79102280000");
